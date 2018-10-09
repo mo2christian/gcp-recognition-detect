@@ -31,14 +31,14 @@ public class TranslateService{
         this.translateAPI = translateAPI;
     }
 
-    public List<String> translate(String from, String target, String ...texts){
+    List<String> translate(String from, String target, String... texts){
         logger.debug("Traduction de {} à {}", from, target);
         TranslateResponse response;
         HttpPost httpPost = new HttpPost(translateAPI);
         httpPost.addHeader("Content-Type", "application/json");
         httpPost.addHeader("Accept", "application/json");
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();) {
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             TranslateRequest translateRequest = new TranslateRequest();
             translateRequest.setFrom(from);
             translateRequest.setTarget(target);
@@ -69,7 +69,7 @@ public class TranslateService{
 
         private List<String> words;
 
-        public TranslateResponse(){
+        TranslateResponse(){
             words = new LinkedList<>();
         }
 
@@ -77,7 +77,7 @@ public class TranslateService{
             return words;
         }
 
-        public void setWords(List<String> words) {
+        void setWords(List<String> words) {
             this.words = words;
         }
     }
@@ -93,31 +93,31 @@ public class TranslateService{
 
         private List<String> words;
 
-        public TranslateRequest(){
+        TranslateRequest(){
             words = new LinkedList<>();
         }
 
-        public String getFrom() {
+        String getFrom() {
             return from;
         }
 
-        public void setFrom(String from) {
+        void setFrom(String from) {
             this.from = from;
         }
 
-        public String getTarget() {
+        String getTarget() {
             return target;
         }
 
-        public void setTarget(String target) {
+        void setTarget(String target) {
             this.target = target;
         }
 
-        public List<String> getWords() {
+        List<String> getWords() {
             return words;
         }
 
-        public void setWords(List<String> words) {
+        void setWords(List<String> words) {
             this.words = words;
         }
     }

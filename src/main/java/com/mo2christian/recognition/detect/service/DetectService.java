@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class DetectService{
     }
 
     public DetectResponse detectLabels(String target, String bucketName, String objectName){
-        try(ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.create();) {
+        try(ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.create()) {
             Feature feat = Feature.newBuilder().setType(Feature.Type.LABEL_DETECTION).build();
             AnnotateImageRequest request =
                     AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(readImages(bucketName, objectName)).build();
@@ -59,9 +58,8 @@ public class DetectService{
         }
     }
 
-    Image readImages(String bucketName, String name) throws MalformedURLException, IOException {
+    private Image readImages(String bucketName, String name){
         ImageSource imgSource = ImageSource.newBuilder().setGcsImageUri("gs://" + bucketName + "/" + name).build();
-        Image img = Image.newBuilder().setSource(imgSource).build();
-        return img;
+        return Image.newBuilder().setSource(imgSource).build();
     }
 }
