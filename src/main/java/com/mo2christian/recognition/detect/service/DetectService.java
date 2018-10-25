@@ -5,6 +5,7 @@ import com.mo2christian.recognition.detect.model.DetectResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -21,7 +22,15 @@ public class DetectService{
 
     private float minScore;
 
-    public void setMinScore(float minScore) {
+    @PostConstruct
+    public void init(){
+        String mScore = System.getenv("MIN_SCORE");
+        if (mScore != null){
+            minScore = Float.parseFloat(mScore);
+        }
+    }
+
+    public void setDefaultMinScore(float minScore) {
         this.minScore = minScore;
     }
 

@@ -1,0 +1,22 @@
+steps:
+- name: 'gcr.io/recognition-218419/mvn'
+  args: ['clean', 'package']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/recognition-detect:${_VERSION}', '-t', 'eu.gcr.io/$PROJECT_ID/recognition-detect:latest', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'eu.gcr.io/$PROJECT_ID/recognition-detect:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'eu.gcr.io/$PROJECT_ID/recognition-detect:${_VERSION}']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['endpoints',  'services', 'deploy', 'endpoints.yaml']
+- name: 'ubuntu'
+  args: ['bash','-c','sed -i s/APP_VERSION/${_VERSION}/g deployment.yaml']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'deployment.yaml']
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=reko-cluster'
+substitutions:
+  _VERSION: 0.1.1
+timeout: 600s
+tags: ['recognition', 'detect']

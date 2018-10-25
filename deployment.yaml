@@ -1,0 +1,70 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: detect-svc
+spec:
+  ports:
+  - port: 8081
+    targetPort: 8081
+    protocol: TCP
+    name: http
+  selector:
+    app: esp-detect
+  type: NodePort
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: esp-detect
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: esp-detect
+    spec:
+      containers:
+      - name: esp
+        image: gcr.io/endpoints-release/endpoints-runtime:1
+        args: [
+          "--http_port=8081",
+          "--backend=127.0.0.1:8080",
+          "--service=detect.endpoints.recognition-218419.cloud.goog",
+          "--rollout_strategy=managed",
+        ]
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 90
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/etc/creds/reko.json"
+        volumeMounts:
+        - name: creds
+          mountPath: "/etc/creds"
+          readOnly: true
+      - name: detect
+        image: eu.gcr.io/recognition-218419/recognition-detect:APP_VERSION
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/etc/creds/reko.json"
+        - name: TRANSLATE_URL
+          value: http://translate.endpoints.recognition-218419.cloud.goog/do
+        volumeMounts:
+        - name: creds
+          mountPath: "/etc/creds"
+          readOnly: true
+        ports:
+          - containerPort: 8080
+      imagePullSecrets:
+      - name: auth-gcr
+      volumes:
+        - name: creds
+          secret:
+            secretName: auth-gcp

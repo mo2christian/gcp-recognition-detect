@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  description: "Detect API."
+  version: "0.1.1"
+  title: "Detect API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "nmomochristian@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "detect.endpoints.recognition-218419.cloud.goog"
+x-google-endpoints:
+  - name: "detect.endpoints.recognition-218419.cloud.goog"
+    target: "35.186.238.119"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /healthz:
+    get:
+      summary: "Health check"
+      description: "Health check path"
+      operationId: "healthcheck"
+      consumes:
+      - "text/*"
+      produces:
+      - "text/*"
+      responses:
+        200:
+          description: "Application alive"
+        404:
+          description: "Application dead"
+  /rest/do:
+    post:
+      summary: "Detect label on a picture"
+      description: "Detect label on a picture"
+      operationId: "detect"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "detectRequest"
+        description: "Detect request"
+        required: true
+        schema:
+          $ref: "#/definitions/detectRequest"
+      responses:
+        200:
+          description: "Successful detection"
+          schema:
+            $ref: "#/definitions/detectResponse"
+        405:
+          description: "Invalid input"
+        500:
+          description: "Error while detection"
+definitions:
+  detectRequest:
+    type: "object"
+    properties:
+      target:
+        type: "string"
+      bucketName:
+        type: "string"
+      objectName:
+        type: "string"
+  detectResponse:
+    type: "object"
+    properties:
+      locale:
+        type: "string"
+      words:
+        type: "array"
+        items:
+          type: "string"

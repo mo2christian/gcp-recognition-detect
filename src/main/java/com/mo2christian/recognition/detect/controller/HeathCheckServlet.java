@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/_ah/start")
+@WebServlet(urlPatterns = {"/healthz", "/_ah/start"})
 public class HeathCheckServlet extends HttpServlet {
 
     @Override

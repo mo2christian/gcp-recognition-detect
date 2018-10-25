@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,16 +26,24 @@ public class TranslateService{
 
     private Logger logger = LogManager.getLogger(TranslateService.class.getClass());
 
-    private String translateAPI;
+    private String translateURL;
 
-    public void setTranslateAPI(String translateAPI) {
-        this.translateAPI = translateAPI;
+    @PostConstruct
+    public void init(){
+        String translateURL = System.getenv("TRANSLATE_URL");
+        if (translateURL != null){
+            this.translateURL = translateURL;
+        }
+    }
+
+    public void setDefaultTranslateURL(String translateAPI) {
+        this.translateURL = translateAPI;
     }
 
     List<String> translate(String from, String target, String... texts){
-        logger.debug("Traduction de {} à {}", from, target);
+        logger.debug("Traduction de {} a {} sur le lien {}", from, target, translateURL);
         TranslateResponse response;
-        HttpPost httpPost = new HttpPost(translateAPI);
+        HttpPost httpPost = new HttpPost(translateURL);
         httpPost.addHeader("Content-Type", "application/json");
         httpPost.addHeader("Accept", "application/json");
 

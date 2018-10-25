@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * Rest controller pour la detection d'images
  */
-@Path("/scan")
+@Path("/do")
 public class DetectController{
 
     private static Logger logger = LogManager.getLogger(DetectController.class.getClass());
