@@ -40,8 +40,8 @@ spec:
           httpGet:
             path: /healthz
             port: 8081
-          initialDelaySeconds: 10
-          periodSeconds: 90
+          initialDelaySeconds: 15
+          periodSeconds: 10
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: "/etc/creds/reko.json"
