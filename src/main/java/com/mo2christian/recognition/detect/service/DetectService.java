@@ -18,8 +18,6 @@ public class DetectService{
 
     private static final Logger logger = LogManager.getLogger(DetectService.class.getClass());
 
-    private TranslateService translateService;
-
     private float minScore;
 
     @PostConstruct
@@ -34,10 +32,6 @@ public class DetectService{
         this.minScore = minScore;
     }
 
-    public void setTranslateService(TranslateService translateService) {
-        this.translateService = translateService;
-    }
-
     public DetectResponse detectLabels(String target, String bucketName, String objectName){
         try(ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.create()) {
             Feature feat = Feature.newBuilder().setType(Feature.Type.LABEL_DETECTION).build();
@@ -49,16 +43,14 @@ public class DetectService{
             BatchAnnotateImagesResponse response = imageAnnotatorClient.batchAnnotateImages(requests);
             AnnotateImageResponse resp = response.getResponsesList().get(0);
             DetectResponse detectResponse = new DetectResponse();
-            detectResponse.setLocale(target);
+            detectResponse.setLocale("en");
             List<String> texts = new LinkedList<>();
             resp.getLabelAnnotationsList().forEach(l -> {
                 if (l.getScore() > minScore){
                     texts.add(l.getDescription());
                 }
             });
-
-            logger.debug("Traduction pour l'image gs://{}/{} avec la langue {}", bucketName, objectName, target);
-            detectResponse.getWords().addAll(translateService.translate(resp.getLabelAnnotations(0).getLocale(), target, texts.toArray(new String[0])));
+            detectResponse.getWords().addAll(texts);
             return detectResponse;
         }
         catch(IOException ex){

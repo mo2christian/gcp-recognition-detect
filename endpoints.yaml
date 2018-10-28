@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "Detect API."
-  version: "0.1.1"
+  version: "0.1.2"
   title: "Detect API"
   termsOfService: "http://swagger.io/terms/"
   contact:
@@ -9,13 +9,13 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "detect.endpoints.recognition-218419.cloud.goog"
+host: "detect.just2teach.com"
 x-google-endpoints:
-  - name: "detect.endpoints.recognition-218419.cloud.goog"
+  - name: "detect.just2teach.com"
     target: "35.186.238.119"
 basePath: "/"
 schemes:
-- "http"
+- "https"
 paths:
   /healthz:
     get:

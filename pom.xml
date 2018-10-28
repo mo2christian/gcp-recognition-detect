@@ -6,7 +6,7 @@
 
     <groupId>com.mo2christian.recognition</groupId>
     <artifactId>recognition-detect</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.2</version>
     <packaging>war</packaging>
 
     <properties>
@@ -108,7 +108,7 @@
                 <version>${jetty.version}</version>
                 <configuration>
                     <webApp>
-                        <contextPath>/${project.build.finalName}</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                     <stopKey>CTRL+C</stopKey>
                     <stopPort>8999</stopPort>

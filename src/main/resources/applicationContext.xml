@@ -2,12 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="autodetect">
 
-    <bean id="translateService" class="com.mo2christian.recognition.detect.service.TranslateService" init-method="init">
-        <property name="defaultTranslateURL" value="https://translate-dot-recognition-218419.appspot.com/"/>
-    </bean>
-
     <bean id="detectService" class="com.mo2christian.recognition.detect.service.DetectService" init-method="init">
-        <property name="translateService" ref="translateService"/>
         <property name="defaultMinScore" value="0.6"/>
     </bean>
 
