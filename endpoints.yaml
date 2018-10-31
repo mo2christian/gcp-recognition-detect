@@ -56,6 +56,8 @@ paths:
           description: "Invalid input"
         500:
           description: "Error while detection"
+      security:
+      - google_id_token: []
 definitions:
   detectRequest:
     type: "object"
@@ -75,3 +77,11 @@ definitions:
         type: "array"
         items:
           type: "string"
+securityDefinitions:
+  google_id_token:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://cloud.google.com/iap"
+    x-google-jwks_uri: "https://www.gstatic.com/iap/verify/public_key-jwk"
+    x-google-audiences: "/projects/50295857426/global/backendServices/3467373391457578740"
