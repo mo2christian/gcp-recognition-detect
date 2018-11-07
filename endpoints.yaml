@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Detect API."
+  description: "Detect a label on picture."
   version: "0.1.2"
   title: "Detect API"
   termsOfService: "http://swagger.io/terms/"
@@ -57,7 +57,7 @@ paths:
         500:
           description: "Error while detection"
       security:
-      - google_id_token: []
+      - google_iap_token: []
 definitions:
   detectRequest:
     type: "object"
@@ -78,7 +78,7 @@ definitions:
         items:
           type: "string"
 securityDefinitions:
-  google_id_token:
+  google_iap_token:
     authorizationUrl: ""
     flow: "implicit"
     type: "oauth2"
