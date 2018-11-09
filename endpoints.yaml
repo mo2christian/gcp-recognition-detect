@@ -57,7 +57,7 @@ paths:
         500:
           description: "Error while detection"
       security:
-      - google_iap_token: []
+      - api_key: []
 definitions:
   detectRequest:
     type: "object"
@@ -85,3 +85,7 @@ securityDefinitions:
     x-google-issuer: "https://cloud.google.com/iap"
     x-google-jwks_uri: "https://www.gstatic.com/iap/verify/public_key-jwk"
     x-google-audiences: "/projects/50295857426/global/backendServices/3467373391457578740"
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
