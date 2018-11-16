@@ -8,7 +8,7 @@
     <Loggers>
         <Logger name="com.google.cloud" level="debug"/>
         <Logger name="org.springframework" level="debug"/>
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>

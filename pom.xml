@@ -6,7 +6,7 @@
 
     <groupId>com.mo2christian.recognition</groupId>
     <artifactId>recognition-detect</artifactId>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <packaging>war</packaging>
 
     <properties>
