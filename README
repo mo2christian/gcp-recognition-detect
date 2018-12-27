@@ -2,11 +2,11 @@ API pour la detection de motifs dans une image
 
 Déployé sur le Google CLOUD, il utilise:
 
-<ul>
-    <li>Cloud Endpoint pour l'exposition de l'API</li>
-    <li>Kubernetes </li>
-    <li>Cloud build pour l continue deployement</li>
-    <li>Cloud Vision pour la detection des motifs</li>
-</ul>
+
+- Cloud Endpoint pour l'exposition de l'API
+- Kubernetes
+- Cloud build pour l continue deployement
+- Cloud Vision pour la detection des motifs
+
 
 API servant de POC pour le test de ces services.
