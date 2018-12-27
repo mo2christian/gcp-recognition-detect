@@ -12,7 +12,7 @@ info:
 host: "detect.just2teach.com"
 x-google-endpoints:
   - name: "detect.just2teach.com"
-    target: "35.186.238.119"
+    target: "0.0.0.0"
 basePath: "/"
 schemes:
 - "https"
@@ -84,7 +84,7 @@ securityDefinitions:
     type: "oauth2"
     x-google-issuer: "https://cloud.google.com/iap"
     x-google-jwks_uri: "https://www.gstatic.com/iap/verify/public_key-jwk"
-    x-google-audiences: "/projects/50295857426/global/backendServices/3467373391457578740"
+    x-google-audiences: "/projects/XXXXXXXXX/global/backendServices/XXXXXXXXX"
   api_key:
     type: "apiKey"
     name: "key"
