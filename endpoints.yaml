@@ -84,7 +84,7 @@ securityDefinitions:
     type: "oauth2"
     x-google-issuer: "https://cloud.google.com/iap"
     x-google-jwks_uri: "https://www.gstatic.com/iap/verify/public_key-jwk"
-    x-google-audiences: "/projects/XXXXXXXXX/global/backendServices/XXXXXXXXX"
+    x-google-audiences: "/projects/XXXXXXXXX/global/backendServices/XXXXXXXXXXXX"
   api_key:
     type: "apiKey"
     name: "key"
